@@ -12,10 +12,13 @@ RUN apk -v --no-cache --update add \
   make \
   curl \
   zip \
-  wget
+  wget \
+  docker \
+  openrc
 RUN python3 -m ensurepip --upgrade \
         && pip3 install --upgrade pip
 RUN pip3 install --no-cache-dir --upgrade aws-sam-cli==${SAM_VERSION}
+RUN rc-update add docker boot
 
 VOLUME [ "/root/.aws" ]
 VOLUME [ "/opt/app" ]

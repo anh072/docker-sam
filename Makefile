@@ -9,7 +9,11 @@ test:
 	@docker run --rm -it $(IMAGE_NAME) sam --version
 
 shell:
-	docker run --rm -it -v ~/.aws:/root/.aws -v $(shell pwd):/opt/app $(IMAGE_NAME) bash
+	docker run --rm -it \
+		-v ~/.aws:/root/.aws \
+		-v $(shell pwd):/opt/app \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		$(IMAGE_NAME) bash
 
 push:
 	docker push $(IMAGE_NAME)
